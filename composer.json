@@ -8,6 +8,7 @@
         "api-platform/api-pack": "^1.1",
         "knpuniversity/oauth2-client-bundle": "^1.22",
         "league/oauth2-facebook": "^2.0",
+        "lexik/jwt-authentication-bundle": "^2.5",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "*",
         "symfony/yaml": "*"
