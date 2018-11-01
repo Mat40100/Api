@@ -25,6 +25,11 @@ class Product
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="decimal", length=10)
+     */
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +49,18 @@ class Product
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price): self
+    {
+        $this->price = $price;
+
+        return $this;
     }
 
 

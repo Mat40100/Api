@@ -21,7 +21,7 @@ class Client
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=50)
      */
     private $name;
 
