@@ -4,11 +4,24 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}},
+ *     itemOperations={
+ *      "get"={"access_control"="is_granted('IS_AUTHENTICATED_ANONYMOUSLY')"},
+ *      "put"={"access_control"="is_granted('ROLE_ADMIN)"},
+ *      "delete"={"access_control"="is_granted('ROLE_ADMIN')"}
+ *     },
+ *     collectionOperations={
+        "get"={"access_control"="is_granted('IS_AUTHENTICATED_ANONYMOUSLY')"},
+ *      "post"={"access_control"="is_granted('ROLE_ADMIN')"}
+ *     }
+ * )
  */
 class Product
 {
@@ -22,11 +35,13 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Groups({"write"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="decimal", length=10)
+     * @Groups({"write"})
      */
     private $price;
 
