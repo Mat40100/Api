@@ -39,6 +39,30 @@ class User
     private $username;
 
     /**
+     * @ORM\Column(type="string", length=150)
+     * @Groups({"read", "write"})
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     * @Groups({"read","write"})
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     * @Groups({"read","write"})
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="text", length=150)
+     * @Groups({"read","write"})
+     */
+    private $password;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="users")
      */
     public $client;
@@ -76,4 +100,70 @@ class User
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname): void
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+
+
 }

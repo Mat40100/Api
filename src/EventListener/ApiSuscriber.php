@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mat
- * Date: 02/11/2018
- * Time: 15:07
- */
 
 namespace App\EventListener;
-
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Client;
@@ -46,7 +39,7 @@ class ApiSuscriber implements EventSubscriberInterface
             $id = $event->getRequest()->get('id');
             $AllowedClient = $this->Emanager->getRepository(Client::class)->find($id);
             if ($this->security->getUser() != $AllowedClient && $AllowedClient){
-                throw new HttpException(403, 'Access Denied');
+                throw new HttpException(403, 'Access Denied.');
             }
         }
     }
