@@ -41,7 +41,6 @@ class DoctrineListener
         }
 
         $entity->setClient($this->security->getUser());
-        $entity->setPassword($this->clientService->encodePassword($entity));
 
         return;
     }

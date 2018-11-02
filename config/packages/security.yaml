@@ -2,29 +2,31 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
-        ROLE_CLIENT: [ROLE_USER, ROLE_CLIENT]
+        ROLE_CLIENT: ROLE_CLIENT
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH, ROLE_USER]
 
     encoders:
-        App\Entity\User:
-            algorithm: bcrypt
         App\Entity\Client:
             algorithm: bcrypt
+        App\Entity\Admin:
+            algorithm: bcrypt
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         chain_provider:
             chain:
-                providers: [client_provider, user_provider]
+                  providers: [client_provider, admin_provider]
 
         client_provider:
             entity:
                 class: App\Entity\Client
                 property: username
 
-        user_provider:
+        # used to reload user from session & other features (e.g. switch_user)
+        admin_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Admin
                 property: username
 
         # used to reload user from session & other features (e.g. switch_user)
