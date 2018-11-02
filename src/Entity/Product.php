@@ -35,13 +35,13 @@ class Product
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Groups({"write"})
+     * @Groups({"write","read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="decimal", length=10)
-     * @Groups({"write"})
+     * @Groups({"write","read"})
      */
     private $price;
 
