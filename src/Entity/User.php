@@ -5,17 +5,21 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ApiResource(
- *     attributes={"access_control"="is_granted('ROLE_ADMIN')"},
- *     collectionOperations={
- *         "get"={"access_control"="is_granted('ROLE_ADMIN')"},
- *         "post"={"access_control"="is_granted('ROLE_ADMIN')"}
- *     },
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}},
  *     itemOperations={
- *         "get"={"access_control"="is_granted('ROLE_USER') and object == user"}
+ *      "get"={"access_control"="is_granted('ROLE_CLIENT') and object.client == user"},
+ *      "put"={"access_control"="is_granted('ROLE_CLIENT') and object.client == user"},
+ *      "delete"={"access_control"="is_granted('ROLE_CLIENT') and object.client == user"}
+ *     },
+ *     collectionOperations={
+        "get"={"access_control"="is_granted('ROLE_ADMIN')"},
+ *      "post"={"access_control"="is_granted('ROLE_CLIENT')"}
  *     }
  * )
  */
@@ -30,13 +34,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"read", "write"})
      */
     private $username;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="users")
      */
-    private $client;
+    public $client;
 
     /**
      * @ORM\Column(type="json")
@@ -46,6 +51,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"write"})
      */
     private $password;
 
