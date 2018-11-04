@@ -19,6 +19,9 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setUsername($userName.$i);
             $user->setEmail($userName.$i.'@testeurs.org');
+            $user->setPassword('ecuelles'.$i);
+            $user->setFirstname('test'.$i);
+            $user->setLastname('test'.$i);
             $randNumber = array_rand($clientList);
             $user->setClient($clientList[$randNumber]);
 
