@@ -27,6 +27,11 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    'App\Serializer\UserContextBuilder':
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\UserContextBuilder.inner' ]
+        autoconfigure: false
+
     App\EventListener\DoctrineListener:
       tags:
         - { name: doctrine.event_listener, event: preUpdate }

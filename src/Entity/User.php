@@ -18,8 +18,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      "delete"={"access_control"="is_granted('ROLE_CLIENT') and object.client == user"}
  *     },
  *     collectionOperations={
-        "get"={"access_control"="is_granted('ROLE_ADMIN')"},
- *      "post"={"access_control"="is_granted('ROLE_CLIENT')"}
+ *          "post"={"access_control"="is_granted('ROLE_CLIENT')"},
+            "ClientGet"={
+     *          "method"="GET",
+     *          "controller"=App\Controller\UsersGet::class
+ *          }
  *     }
  * )
  */
@@ -64,6 +67,7 @@ class User
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="users")
+     * @Groups({"admin:read"})
      */
     public $client;
 

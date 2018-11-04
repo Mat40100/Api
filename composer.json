@@ -9,6 +9,7 @@
         "knpuniversity/oauth2-client-bundle": "^1.22",
         "league/oauth2-facebook": "^2.0",
         "lexik/jwt-authentication-bundle": "^2.5",
+        "sensio/framework-extra-bundle": "^5.2",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "*",
         "symfony/security-bundle": "*",
