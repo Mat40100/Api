@@ -7,7 +7,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -40,12 +40,20 @@ class Client implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"read"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min = 6
+     *     )
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=50, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      * @Groups({"read", "write"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     max = 100
+     * )
      */
     private $name;
 
@@ -56,8 +64,15 @@ class Client implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=250)
      * @Groups({"write", "read"})
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min = 6,
+     *     max = 250,
+     *     minMessage="Password must be at least {{ limit }} characters long",
+     *     maxMessage="Password cannot be longer than {{ limit }}"
+     * )
      */
     private $password;
 
