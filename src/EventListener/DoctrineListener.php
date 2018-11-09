@@ -19,7 +19,10 @@ class DoctrineListener
         $this->security = $security;
     }
 
-    public function PreUpdate(LifecycleEventArgs $args)
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function preUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
 
@@ -28,11 +31,12 @@ class DoctrineListener
         }
 
         $entity->setPassword($this->clientService->encodePassword($entity));
-
-        return;
     }
 
-    public function PrePersist(LifecycleEventArgs $args)
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
 
@@ -41,7 +45,5 @@ class DoctrineListener
         }
 
         $entity->setClient($this->security->getUser());
-
-        return;
     }
 }

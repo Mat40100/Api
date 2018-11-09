@@ -45,6 +45,9 @@ class Product
      */
     private $price;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -66,11 +69,18 @@ class Product
         $this->name = $name;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPrice()
     {
         return $this->price;
     }
 
+    /**
+     * @param $price
+     * @return Product
+     */
     public function setPrice($price): self
     {
         $this->price = $price;

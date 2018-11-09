@@ -87,6 +87,9 @@ class Client implements UserInterface
         $this->users = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +105,10 @@ class Client implements UserInterface
         return (string) $this->username;
     }
 
+    /**
+     * @param string $username
+     * @return Client
+     */
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -121,6 +128,10 @@ class Client implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return Client
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -136,6 +147,10 @@ class Client implements UserInterface
         return (string) $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return Client
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -168,6 +183,10 @@ class Client implements UserInterface
         return $this->users;
     }
 
+    /**
+     * @param User $user
+     * @return Client
+     */
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
@@ -178,6 +197,10 @@ class Client implements UserInterface
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @return Client
+     */
     public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
@@ -191,11 +214,18 @@ class Client implements UserInterface
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Client
+     */
     public function setName(string $name): self
     {
         $this->name = $name;

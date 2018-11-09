@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     collectionOperations={
  *          "post"={"access_control"="is_granted('ROLE_CLIENT')"},
             "ClientGet"={
-     *          "method"="GET",
-     *          "controller"=App\Controller\UsersGet::class
+ *            "method"="GET",
+ *            "controller"=App\Controller\UsersGet::class
  *          }
  *     }
  * )

@@ -25,16 +25,18 @@ class UsersGet
      *     name="users_get",
      *     defaults={"_api_resource_class"=App\Entity\User::class,"_api_collection_operation_name"="get"})
      */
-    public function __invoke($data)
+    public function __invoke()
     {
+        $data = [];
+
         if ($this->security->isGranted('ROLE_CLIENT')) {
             $data = $this->entityManager->getRepository(User::class)->findBy(array('client' => $this->security->getUser()->getId()));
-            return $data;
         }
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $data = $this->entityManager->getRepository(User::class)->findAll();
-            return $data;
         }
+
+        return $data;
     }
 }
